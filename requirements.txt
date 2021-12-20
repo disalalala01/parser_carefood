@@ -1,0 +1,8 @@
+
+beautifulsoup4==4.10.0
+bs4==0.0.1
+kafka-python==2.0.2
+lxml==4.6.3
+python-dotenv==0.19.1
+requests==2.26.0
+urllib3==1.26.7

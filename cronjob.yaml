@@ -1,0 +1,33 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: _APP_NAME_
+  namespace: microservices
+spec:
+  jobTemplate:
+    metadata:
+      name: _APP_NAME_
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: _IMAGE_NAME_
+            name: _APP_NAME_
+            command: ["python","-u","manage.py"]
+            imagePullPolicy: Always
+            envFrom:
+            - configMapRef:
+                name: cfm-_APP_NAME_
+            resources:
+              requests:
+                memory: "64Mi"
+                cpu: "250m"
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+          restartPolicy: OnFailure
+          imagePullSecrets:
+          - name: registry-credentials
+  schedule: "0 1 * * *"
